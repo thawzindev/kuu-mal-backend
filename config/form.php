@@ -8,12 +8,8 @@ return [
 			'value' => '1',
 		],
 		[
-			'name' => 'Manager',
-			'value' => '2',
-		],
-		[
 			'name' => 'User',
-			'value' => '99'
+			'value' => '3'
 		]
 	],
 

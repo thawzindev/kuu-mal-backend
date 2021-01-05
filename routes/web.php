@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', function () {
-    return view('welcome');
+    abort("404");
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -15,6 +15,7 @@ Route::prefix(config('app.admin_prefix'))->group(function () // sample 'admin'
 	Route::middleware(['auth', 'superadmin'])->group(function () {
 		Route::get('/', 'Admin\DashboardController@index')->name('admin.index');
 		Route::resource('users', 'Admin\UserController', ['as' => 'admin']);
+		Route::get('users/admin/list', 'Admin\UserController@AdminList')->name('admin.users.list');
 
 	});
 });
