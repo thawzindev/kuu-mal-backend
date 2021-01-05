@@ -28,24 +28,7 @@ class UserController extends Controller
             return response($users);
         }
         
-        $users = User::filter($filter)->where("role",3)->paginate();
-
-        return view('admin.users.index', compact('users'));
-    }
-
-    public function AdminList(UserFilter $filter)
-    {
-        if (request()->expectsJson()) {
-            $name = request('q');
-            $users = User::select('id', 'name')
-                ->where('name', 'LIKE', "%{$name}%")
-                ->limit(5)
-                ->get();
-
-            return response($users);
-        }
-        
-        $users = User::filter($filter)->where("role",1)->paginate();
+        $users = User::filter($filter)->paginate();
 
         return view('admin.users.index', compact('users'));
     }

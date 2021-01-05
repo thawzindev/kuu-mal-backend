@@ -13,9 +13,9 @@
             </div>
           </div>
         </div>
-        <!-- <button class="btn btn-success btn-block">New Project
+        <button class="btn btn-success btn-block">New Project
           <i class="mdi mdi-plus"></i>
-        </button> -->
+        </button>
       </div>
     </li>
 
@@ -35,9 +35,6 @@
       </a>
       <div class="collapse {{ show_segment(2, 'users') }}" id="user-dropdown">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item">
-            <a class="nav-link {{ active_path('users/admin/list') }}" href="{{ route('admin.users.list') }}">Admin Lists</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link {{ active_path('users') }}" href="{{ route('admin.users.index') }}">User Lists</a>
           </li>

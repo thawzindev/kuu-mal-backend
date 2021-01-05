@@ -60,53 +60,6 @@
               @slot('value', isset($user)? $user->phone: '')
               @slot('required', 'required')
             @endcomponent
-
-            <!-- WhatsApp -->
-            @component('components.textbox')
-              @slot('type', 'phone')
-              @slot('title', 'WhatsApp Phone (required)')  
-              @slot('name', 'whatsapp_phone')
-              @slot('placeholder', 'Enter WhatsApp Phone')
-              @slot('value', isset($user)? $user->whatsapp_phone: '')
-              @slot('required', 'required')
-            @endcomponent
-
-            <!-- Viber -->
-            @component('components.textbox')
-              @slot('type', 'phone')
-              @slot('title', 'Viber Phone (required)')  
-              @slot('name', 'viber_phone')
-              @slot('placeholder', 'Enter Viber Phone')
-              @slot('value', isset($user)? $user->viber_phone: '')
-              @slot('required', 'required')
-            @endcomponent
-
-            <!-- Messenger Url -->
-            @component('components.textbox')
-              @slot('title', 'Messenger URL (required)')  
-              @slot('name', 'messenger_url')
-              @slot('placeholder', 'Enter Messenger Url')
-              @slot('value', isset($user) ? $user->messenger_url : '')
-              @slot('required', 'required')
-            @endcomponent
-
-            <!-- Facebook URL -->
-            @component('components.textbox')
-              @slot('title', 'Facebook URL (required)')  
-              @slot('name', 'facebook_url')
-              @slot('placeholder', 'Enter Facebook URL')
-              @slot('value', isset($user) ? $user->facebook_url : '')
-              @slot('required', 'required')
-            @endcomponent
-
-            <!-- Description -->
-            @component('components.textareabox')
-              @slot('title', 'Description')  
-              @slot('name', 'description')
-              @slot('placeholder', 'Enter Description')
-              @slot('value', isset($user) ? $user->description : '')
-              @slot('required', '')
-            @endcomponent
             
             <!-- role -->
             @component('components.selectbox-with-array')
@@ -135,6 +88,28 @@
               @slot('placeholder', 'Enter Confirm Password')
               @slot('value', '')
               @slot('required', 'required')
+            @endcomponent
+
+            {{-- Using sample components --}}
+            @component('components.selectbox-with-object')
+              @slot('title', 'Ajax Select2 Sample (required)')
+              @slot('name', 'role2')
+              @slot('objectName', 'name')
+              @slot('selected', '')
+            @endcomponent
+
+            @component('components.selectbox-with-object')
+              @slot('title', 'Ajax Multiple Select2 Sample (required)')
+              @slot('name', 'role3[]')
+              @slot('objectName', 'name')
+              @slot('selected', '')
+              @slot('multiple', 'multiple')
+            @endcomponent
+
+            @component('components.textareabox')
+              @slot('title', 'Address (optional)')
+              @slot('name', 'address')
+              @slot('value', '')
             @endcomponent
 
             <input class="btn btn-primary" type="submit" value="Save"> 
