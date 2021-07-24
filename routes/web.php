@@ -16,6 +16,11 @@ Route::prefix(config('app.admin_prefix'))->group(function () // sample 'admin'
 		Route::get('/', 'Admin\DashboardController@index')->name('admin.index');
 		Route::resource('users', 'Admin\UserController', ['as' => 'admin']);
 
+		Route::get('/tokens/create', function (Request $request) {
+		    $token = App\Models\Volunteer::first()->createToken('login');
+
+		    return ['token' => $token->plainTextToken];
+		});
 
 	});
 });
