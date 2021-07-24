@@ -16,6 +16,7 @@ Route::prefix(config('app.admin_prefix'))->group(function () // sample 'admin'
 		Route::get('/', 'Admin\DashboardController@index')->name('admin.index');
 		Route::resource('users', 'Admin\UserController', ['as' => 'admin']);
 
+
 	});
 });
 

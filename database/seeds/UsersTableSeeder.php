@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
 class UsersTableSeeder extends Seeder
 {
