@@ -21,6 +21,7 @@ class CreateHelpRequestListsTable extends Migration
             $table->unsignedInteger('township_id')->index();
             $table->text('activities');
             $table->text('address');
+            $table->boolean('status')->default(0);
             $table->index(['name', 'phone']);
             $table->timestamps();
         });

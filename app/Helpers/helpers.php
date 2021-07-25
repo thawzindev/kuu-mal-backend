@@ -175,6 +175,14 @@ if (! function_exists('chr3n6_random')) {
 	}
 }
 
+if (! function_exists('help_uuid')) {
+	
+	function help_uuid()
+	{
+		return rand(100, 999) . '-' . substr(uniqid(),-3);
+	}
+}
+
 /**
  * Get MB from given bytes.
  */

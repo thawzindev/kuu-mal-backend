@@ -10,4 +10,13 @@ class Township extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    /**
+     * Query scope.
+    */
+    public function scopeFilter($query, $filter)
+    {
+        $filter->apply($query);
+    }
+
 }
