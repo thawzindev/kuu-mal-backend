@@ -27,6 +27,8 @@ class HelpController extends Controller
 
     	$data = $request->all();
     	$data['uuid'] = help_uuid();
+        $data['user_agent'] = $request->header('User-Agent');
+        $data['ip_address'] = getIp();
 
     	HelpRequestList::create($data);
 

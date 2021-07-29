@@ -6,6 +6,32 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/testing', function (Request $request) {
+
+    \DB::beginTransaction();
+
+	try {
+	    \App\User::create([
+	    	'name'	=> 'hi',
+	    	'email'	=> rand().'@gmail.com',
+	    	'phone'	=> rand(),
+	    	'password'	=> bcrypt(rand()),
+	    	'role' => 1
+	    ]);
+
+	    $k = \App\User::find(10212);
+
+	    $k->name= 'ag ko';
+	    $k->save();
+
+	    \DB::commit();
+	    // all good
+	} catch (\Exception $e) {
+		\Log::info($e);
+	    \DB::rollback();
+	    // something went wrong
+	}
+});
 /**
  * CMS route.
  */

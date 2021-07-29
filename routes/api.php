@@ -13,14 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware(['checkBanIpAddress'])->group(function () {
 
 	Route::post('volunteer/login', 'Api\LoginController@login');
+	Route::post('volunteer/create', 'Api\VolunteerController@create');
 	Route::get('volunteers', 'Api\VolunteerController@index');
 	Route::post('help/request', 'Api\HelpController@requestForm');
 	Route::get('townships', 'Api\StateAndTownshipController@getTownship');
 	Route::get('states', 'Api\StateAndTownshipController@getState');
 	Route::get('help/requests/list', 'Api\HelpController@requestList');
+	
+});
+
+
+	
 
