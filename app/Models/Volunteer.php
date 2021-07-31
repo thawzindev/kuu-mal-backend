@@ -14,12 +14,20 @@ class Volunteer extends Model
 
     protected $guarded = [];
 
+
     public function scopeActive($query){
         return $query->where('active', 1);
     }
 
+
     public function township()
     {
     	return $this->belongsTo(\App\Models\Township::class);
+    }
+
+
+    public function scopeFilter($query, $filter)
+    {
+        $filter->apply($query);
     }
 }

@@ -20,7 +20,7 @@ class BanIpAddressMiddleware
         $bannedIps = BanIpAddress::pluck('ip_address')->toArray();
 
         if (in_array(getIp(), $bannedIps)) {
-            return response()->json(['message' => 'သင်လက်ရှိအသုံးမပြုနိုင်ပါ။'], 422);
+            return response()->json(['message' => 'သင်လက်ရှိအသုံးမပြုနိုင်ပါ။'], 403);
         }
         return $next($request);
     }

@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\Volunteer;
 use App\Http\Resources\VolunteerListResource;
 use Validator;
+use App\Filters\VolunteerFilter;
 
 class VolunteerController extends Controller
 {
-    public function index()
+    public function index(VolunteerFilter $filter)
     {
-    	$data = Volunteer::active()->with('township')->paginate(10);
+    	$data = Volunteer::filter($filter)->active()->with('township')->paginate(10);
 
     	return VolunteerListResource::collection($data);
     }

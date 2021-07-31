@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\HelpFormRequest;
 use App\Http\Resources\HelpRequestListResource;
+use App\Filters\HelpRequestListFilter;
 use Validator;
 use App\Models\HelpRequestList;
 
@@ -36,9 +37,9 @@ class HelpController extends Controller
 
     }
 
-    public function requestList(Request $request)
+    public function requestList(Request $request, HelpRequestListFilter $filter)
     {
-        $data = HelpRequestList::notComplete()
+        $data = HelpRequestList::filter($filter)->notComplete()
                         ->with('township')
                         ->orderBy('created_at', 'desc')
                         ->paginate();

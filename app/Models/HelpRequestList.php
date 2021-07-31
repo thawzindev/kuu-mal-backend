@@ -20,4 +20,8 @@ class HelpRequestList extends Model
         return $query->where('status', 0);
     }
 
+    public function scopeFilter($query, $filter)
+    {
+        $filter->apply($query);
+    }
 }
