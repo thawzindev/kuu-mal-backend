@@ -15,6 +15,17 @@ use Illuminate\Http\Request;
 
 Route::middleware(['checkBanIpAddress'])->group(function () {
 
+	Route::middleware(['auth.jwt'])->group(function () {
+
+		Route::prefix('volunteer')->group(function() {
+
+			Route::get('profile', 'Api\VolunteerController@getProfile');
+			Route::post('profile/update', 'Api\VolunteerController@update');
+
+		});
+	});
+
+
 	Route::post('volunteer/login', 'Api\LoginController@login');
 	Route::post('volunteer/create', 'Api\VolunteerController@create');
 	Route::get('volunteers', 'Api\VolunteerController@index');

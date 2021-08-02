@@ -42,8 +42,13 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
+            'driver' => 'jwt',
+            'provider' => 'volunteers',
+        ],
+
+        'volunteers' => [
+            'driver' => 'jwt',
+            'provider' => 'volunteers',
         ],
     ],
 
@@ -67,13 +72,13 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model'  => App\Models\Volunteer::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'volunteers' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\Volunteer::class,
+        ],
     ],
 
     /*

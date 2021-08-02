@@ -64,6 +64,9 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'superadmin' => \App\Http\Middleware\SuperAdmin::class,
         'checkBanIpAddress' => \App\Http\Middleware\BanIpAddressMiddleware::class,
+        'auth.jwt' => \App\Http\Middleware\GetUserFromToken::class,
+        'jwt.refresh' => \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
+
     ];
 
     /**
