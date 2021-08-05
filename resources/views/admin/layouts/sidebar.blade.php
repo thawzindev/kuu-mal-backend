@@ -45,6 +45,53 @@
       </div>
     </li>
 
+
+    <!-- Volunteer management -->
+    <li class="nav-item {{ active_segment(2, 'volunteers') }}">
+      <a class="nav-link" data-toggle="collapse" href="#volunteers-dropdown" aria-expanded="false" aria-controls="volunteers-dropdown">
+        <i class="menu-icon mdi mdi-human-handsup"></i>
+        <span class="menu-title">Volunteer Management</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse {{ show_segment(2, 'volunteers') }}" id="volunteers-dropdown">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link {{ active_path('volunteers') }}" href="{{ route('admin.volunteers.index') }}">Volunteer Lists</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ active_path('volunteers/create') }}" href="{{ route('admin.volunteers.create') }}">Add New Volunteer</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- Help Request List management -->
+    <li class="nav-item {{ active_segment(2, 'help/requests') }}">
+      <a class="nav-link" data-toggle="collapse" href="#help-dropdown" aria-expanded="false" aria-controls="help-dropdown">
+        <i class="menu-icon mdi mdi-heart-half-full"></i>
+        <span class="menu-title">Help Requests Management</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse {{ show_segment(2, 'help/requests') }}" id="help-dropdown">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link {{ active_path('help/requests') }}" href="{{ route('admin.requests.index') }}">Request Lists</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ active_path('help/requests/create') }}" href="{{ route('admin.requests.create') }}">Add New Help</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item {{ active_segment(2, 'ips') }}">
+      <a class="nav-link" href="{{ route('admin.ips.index') }}">
+        <i class="menu-icon mdi mdi-security"></i>
+        <span class="menu-title">Banned Ips</span>
+      </a>
+    </li>
+
+
     
   </ul>
 </nav>

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Volunteer;
+use App\Models\State;
 use Illuminate\Http\Request;
+use App\Http\Requests\VolunteerRequest;
+use App\Filters\VolunteerFilter;
 
 class VolunteerController extends Controller
 {
@@ -13,9 +16,12 @@ class VolunteerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(VolunteerFilter $filter, Request $request)
     {
-        //
+        $states = State::get();
+        $volunteers = Volunteer::filter($filter)->with(['state', 'township'])->paginate();
+
+        return view('admin.volunteers.index', compact('volunteers', 'states'));
     }
 
     /**
@@ -25,7 +31,9 @@ class VolunteerController extends Controller
      */
     public function create()
     {
-        //
+        $route = route('admin.volunteers.store');
+        $states = State::get();
+        return view('admin.volunteers.create', compact('states', 'route'));
     }
 
     /**
@@ -34,9 +42,15 @@ class VolunteerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VolunteerRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $data['password'] = bcrypt($request->password);
+
+        Volunteer::create($data);
+
+        return redirect()->route('admin.volunteers.index')->with('flash', 'Success');
     }
 
     /**
@@ -58,7 +72,9 @@ class VolunteerController extends Controller
      */
     public function edit(Volunteer $volunteer)
     {
-        //
+        $route = route('admin.volunteers.update', $volunteer->id);
+        $states = State::get();
+        return view('admin.volunteers.edit' , compact('states', 'volunteer', 'states', 'route'));
     }
 
     /**
@@ -68,9 +84,22 @@ class VolunteerController extends Controller
      * @param  \App\Models\Volunteer  $volunteer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Volunteer $volunteer)
+    public function update(VolunteerRequest $request, Volunteer $volunteer)
     {
-        //
+        $data = $request->validated();
+
+        $data['password'] = $data['password'] == null ? $volunteer->password : bcrypt($data['password']);
+
+        $volunteer->update($data);
+
+        return redirect()->route('admin.volunteers.index')->with('flash', 'Successfully updated.!');
+    }
+
+    public function updateStatus(Volunteer $volunteer)
+    {
+        $volunteer->update(['active' => !$volunteer->active]);
+
+        return back()->with('flash', 'Successfully updated');
     }
 
     /**
@@ -81,6 +110,8 @@ class VolunteerController extends Controller
      */
     public function destroy(Volunteer $volunteer)
     {
-        //
+        $volunteer->delete();
+
+        return back()->with('flash', 'Successfully deleted.');
     }
 }

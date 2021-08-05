@@ -8,6 +8,8 @@ use App\Models\Volunteer;
 use App\Http\Resources\VolunteerListResource;
 use Validator;
 use App\Filters\VolunteerFilter;
+use App\Http\Requests\VolunteerUpdateRequest;
+use App\Http\Resources\VolunteerProfileResource;
 
 class VolunteerController extends Controller
 {
@@ -16,7 +18,7 @@ class VolunteerController extends Controller
     {
         $user = auth()->user();
 
-        return response()->json(['data' => $user]);
+        return new VolunteerProfileResource($user);
     }
 
     public function index(VolunteerFilter $filter)
@@ -43,16 +45,29 @@ class VolunteerController extends Controller
 
     	$data = $request->all();
     	$data['password'] = bcrypt($request->password);
+        $data['user_agent'] = $request->header('User-Agent');
+        $data['ip_address'] = getIp();
 
     	Volunteer::create($data);
 
     	return response()->json(['message' => 'Success']);
     }
 
-    public function update(Request $request)
+    public function update(VolunteerUpdateRequest $request)
     {
+        $validated = $request->validated();
+
+        $volunteer = auth()->user();
+
+        $diffTime = time() - $volunteer->updated_at->timestamp;
+
+        if ($diffTime < 1800 ) {
+            return response()->json(['message' => "update မပြုလုပ်နိုင်သေးပါ။ နောက် နာရီဝက်မှ ပြန်လည် update လုပ်ပါ။"], 422);
+        }    
+
+
         $data = $request->all();
-        auth()->user()->update($data);
+        $volunteer->update($data);
 
         return response()->json(['message' => 'Success']);
     }

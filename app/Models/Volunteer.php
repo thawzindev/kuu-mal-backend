@@ -23,10 +23,31 @@ class Volunteer extends Authenticatable  implements JWTSubject
         return $query->where('active', 1);
     }
 
+    public function state()
+    {
+        return $this->belongsTo(\App\Models\State::class);
+    }
 
     public function township()
     {
     	return $this->belongsTo(\App\Models\Township::class);
+    }
+
+    public function label() 
+    {
+        if ($this->active == 1) return 'success';
+        if ($this->active == 0) return 'danger';
+    }
+
+    public function buttonLabel() 
+    {
+        if ($this->active == 1) return 'warning';
+        if ($this->active == 0) return 'success';
+    }
+
+    public function isActive()
+    {
+        return $this->active == 1 ? 'active' : 'unactive';
     }
 
 

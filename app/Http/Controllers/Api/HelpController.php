@@ -9,6 +9,7 @@ use App\Http\Resources\HelpRequestListResource;
 use App\Filters\HelpRequestListFilter;
 use Validator;
 use App\Models\HelpRequestList;
+use App\Models\Volunteer;
 
 class HelpController extends Controller
 {
@@ -39,11 +40,23 @@ class HelpController extends Controller
 
     public function requestList(Request $request, HelpRequestListFilter $filter)
     {
-        $data = HelpRequestList::filter($filter)->notComplete()
+        $data = HelpRequestList::filter($filter)->active()
                         ->with('township')
                         ->orderBy('created_at', 'desc')
                         ->paginate();
 
         return HelpRequestListResource::collection($data);
+    }
+
+    public function volunteerAndHelpRequestCount()
+    {
+        $volunteerCount = Volunteer::active()->count();
+        $helpRequestCount = HelpRequestList::active()->count();
+
+        $data = ['volunteer_count' => $volunteerCount, 'help_request_count' => $helpRequestCount];
+
+        return response()->json(['data' => $data]);
+
+
     }
 }

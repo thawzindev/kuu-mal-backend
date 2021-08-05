@@ -33,6 +33,7 @@ Route::middleware(['checkBanIpAddress'])->group(function () {
 	Route::get('townships', 'Api\StateAndTownshipController@getTownship');
 	Route::get('states', 'Api\StateAndTownshipController@getState');
 	Route::get('help/requests/list', 'Api\HelpController@requestList');
+	Route::get('volunteer-and-help-request/counts', 'Api\HelpController@volunteerAndHelpRequestCount');
 	
 });
 

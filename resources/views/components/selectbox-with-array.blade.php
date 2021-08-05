@@ -2,10 +2,11 @@
   <label for="{{ $name }}">{{ $title }}</label>
 
   <select class="form-control" id="{{ $name }}" name="{{ $name }}">
+    <option> --select-- </option>
     @foreach($objects as $object)
       <option 
-        value="{{ $object['value'] }}"
-        {{ old($name, $selected) == $object['value'] ? 'selected': '' }}
+        value="{{ $object['id'] }}"
+        {{ old($name, $selected) == $object['id'] ? 'selected': '' }}
       >
         {{ $object[$objectName] }}
       </option>

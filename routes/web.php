@@ -38,15 +38,22 @@ Route::get('/testing', function (Request $request) {
 Route::prefix(config('app.admin_prefix'))->group(function () // sample 'admin'
 {
 	Auth::routes(['register' => false]);
+
+	Route::get('states/{id}/townships', 'Admin\StateAndTownshipController@search');
+
 	Route::middleware(['auth', 'superadmin'])->group(function () {
 		Route::get('/', 'Admin\DashboardController@index')->name('admin.index');
 		Route::resource('users', 'Admin\UserController', ['as' => 'admin']);
 
-		Route::get('/tokens/create', function (Request $request) {
-		    $token = App\Models\Volunteer::first()->createToken('login');
+		Route::resource('volunteers', 'Admin\VolunteerController', ['as' => 'admin']);
+		Route::get('volunteer/{volunteer}/update/status', 'Admin\VolunteerController@updateStatus')->name('admin.volunteers.status_update');
 
-		    return ['token' => $token->plainTextToken];
-		});
+		Route::resource('help/requests', 'Admin\HelpRequestListController', ['as' => 'admin']);
+		Route::get('help/requests/{request}/update/status', 'Admin\HelpRequestListController@updateStatus')->name('admin.requests.status_update');
+
+		Route::resource('banned/ips', 'Admin\BanIpAddressController', ['as' => 'admin']);
+		Route::get('ips/{ip}/ban', 'Admin\BanIpAddressController@banIp')->name('admin.ips.ban');
+
 
 	});
 });

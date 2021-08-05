@@ -9,7 +9,7 @@ class VolunteerFilter extends Filters
 	 * Register filter properties
 	 */
 	protected $filters = [
-		'state_id', 'township_id'
+		'state_id', 'township_id', 'keyword'
 	];
 
 	/**
@@ -23,6 +23,15 @@ class VolunteerFilter extends Filters
 	public function township_id($value) 
 	{
 		return $this->builder->where('township_id', $value);
+	}
+
+	public function keyword($value) 
+	{
+		return $this->builder
+			->where(function ($query) use ($value) {
+				$query->where('name', 'LIKE', "%{$value}%")		
+					  ->orWhere('phone', 'LIKE', "%{$value}%");
+			});
 	}
 
 }

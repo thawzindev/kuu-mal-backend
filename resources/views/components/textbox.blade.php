@@ -1,5 +1,5 @@
 <div class="form-group {{ $errors->has($name) ? 'has-danger': ''}}">
-  	<label for="{{ $name }}">{{ $title }}</label>
+  	<label for="{{ $name }}">{{ $title }} @if(isset($required)) <span class="text-danger">*</span> @endif</label>
 
   	<input id="{{ $name }}" 
   		   class="form-control" 
