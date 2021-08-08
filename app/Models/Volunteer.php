@@ -14,9 +14,9 @@ class Volunteer extends Authenticatable  implements JWTSubject
 
     protected $guarded = [];
 
-    public $hidden = [
-        'password', 'ip_address', 'user_agent'
-    ];
+    // public $hidden = [
+        // 'password', 'ip_address', 'user_agent'
+    // ];
 
 
     public function scopeActive($query){

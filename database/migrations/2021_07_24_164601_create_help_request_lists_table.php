@@ -22,7 +22,7 @@ class CreateHelpRequestListsTable extends Migration
             $table->unsignedInteger('township_id');
             $table->text('activities');
             $table->text('address');
-            $table->text('ip_address')->index();
+            $table->string('ip_address')->index();
             $table->text('user_agent')->nullable();
             $table->boolean('status')->default(0);
             $table->index(['name', 'phone']);

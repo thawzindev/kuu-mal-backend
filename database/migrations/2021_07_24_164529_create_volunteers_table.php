@@ -23,7 +23,7 @@ class CreateVolunteersTable extends Migration
             $table->unsignedInteger('township_id');
             $table->text('activities');
             $table->text('address')->nullable();
-            $table->text('ip_address')->index();
+            $table->string('ip_address')->index();
             $table->text('user_agent')->nullable();
             $table->timestamps();
         });

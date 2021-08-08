@@ -32,8 +32,8 @@ class VolunteerController extends Controller
     {
     	$validator = Validator::make($request->all(), [
             'name'       => 'required|max:30',
-            'phone'       => 'required|unique:volunteers|max:11',
-            'password'       => 'required|max:12',
+            'phone'       => 'required|unique:volunteers|max:30',
+            'password'       => 'required|max:30',
             'state_id'       => 'required',
             'township_id'       => 'required',
             'activities'    => 'required|max:255',
