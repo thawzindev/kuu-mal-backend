@@ -11,7 +11,7 @@
 
 return [
 
-    'user' => 'App\Models\Volunteer',
+    'user' => \App\Models\Volunteer::class,
 
 
     /*

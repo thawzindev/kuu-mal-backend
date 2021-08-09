@@ -41,11 +41,6 @@ return [
             'provider' => 'users',
         ],
 
-        'api' => [
-            'driver' => 'jwt',
-            'provider' => 'volunteers',
-        ],
-
         'volunteers' => [
             'driver' => 'jwt',
             'provider' => 'volunteers',

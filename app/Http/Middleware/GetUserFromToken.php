@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Tymon\JWTAuth\JWTAuth;
+use JWTAuth;
 use Illuminate\Contracts\Events\Dispatcher;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
@@ -42,25 +42,14 @@ class GetUserFromToken
      */
     public function handle($request, Closure $next)
     {
-
-        if (! $token = $this->auth->setRequest($request)->getToken()) {
-            return response(['error' => 'Token not provided'], 401);
-        }
-
         try {
-            $user = $this->auth->authenticate($token);
+            $user = \JWTAuth::parseToken()->authenticate();
         } catch (TokenExpiredException $e) {
             return response(['error' => 'Token expired'], 401);
         } catch (JWTException $e) {
             return response(['error' => $e->getMessage()], 401);
         }
 
-        if (! $user) {
-            return response(['error' => 'User not found'], 404);
-        }
-
-        $this->events->dispatch('tymon.jwt.valid', $user);
-        
         return $next($request);
     }
 }

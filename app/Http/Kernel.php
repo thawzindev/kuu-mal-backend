@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'superadmin' => \App\Http\Middleware\SuperAdmin::class,
         'checkBanIpAddress' => \App\Http\Middleware\BanIpAddressMiddleware::class,
         'auth.jwt' => \App\Http\Middleware\GetUserFromToken::class,
+        'assign.guard' => \App\Http\Middleware\AssignGuardMiddleware::class,
         'jwt.refresh' => \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
 
     ];

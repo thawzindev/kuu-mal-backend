@@ -29,7 +29,7 @@ class VolunteerUpdateRequest extends FormRequest
         return [
             'name' => 'required',
             'phone' => [
-                'required', 'numeric',
+                'required',
                     Rule::unique('volunteers')->ignore($id)
             ],
             'address' => 'required',

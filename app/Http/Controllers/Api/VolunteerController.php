@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Volunteer;
 use App\Http\Resources\VolunteerListResource;
 use Validator;
+use Illuminate\Validation\Rule;
 use App\Filters\VolunteerFilter;
 use App\Http\Requests\VolunteerUpdateRequest;
 use App\Http\Resources\VolunteerProfileResource;
@@ -53,9 +54,22 @@ class VolunteerController extends Controller
     	return response()->json(['message' => 'Success']);
     }
 
-    public function update(VolunteerUpdateRequest $request)
+    public function update(Request $request)
     {
-        $validated = $request->validated();
+        dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'phone' => [
+                'required',
+                    Rule::unique('volunteers')->ignore(auth()->id())
+            ],
+            'address' => 'required',
+            'activities'    => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response(['message'  => $validator->errors()->first()], 422);
+        }
 
         $volunteer = auth()->user();
 

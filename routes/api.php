@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::middleware(['checkBanIpAddress'])->group(function () {
 
-	Route::middleware(['auth.jwt'])->group(function () {
+	Route::middleware(['assign.guard:volunteers', 'auth.jwt'])->group(function () {
 
 		Route::prefix('volunteer')->group(function() {
 
@@ -23,6 +23,7 @@ Route::middleware(['checkBanIpAddress'])->group(function () {
 			Route::post('profile/update', 'Api\VolunteerController@update');
 
 		});
+
 	});
 
 
