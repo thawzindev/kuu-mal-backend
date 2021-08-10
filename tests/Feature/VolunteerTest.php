@@ -107,13 +107,12 @@ class VolunteerTest extends TestCase
             'Content-Type'  => 'application/json',
             'Authorization' => 'bearer '. $token,
         ];
+        
 
-        $updateProfileResp = $this->withHeaders($headers)->post('/api/volunteer/profile/update', $profileUpdateAttributes);
-        dd($updateProfileResp->content());
+        $updateProfileResp = $this->withHeaders($headers)->postJson('/api/volunteer/profile/update', $profileUpdateAttributes);
+        
         $updateProfileResp->assertStatus(200)->assertJsonStructure([
-            'data' => [
-                'id', 'name', 'phone', 'active', 'activities', 'address'
-            ]
+            'message'
         ]);
     }
 

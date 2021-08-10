@@ -56,7 +56,6 @@ class VolunteerController extends Controller
 
     public function update(Request $request)
     {
-        dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'phone' => [
@@ -70,7 +69,7 @@ class VolunteerController extends Controller
         if ($validator->fails()) {
             return response(['message'  => $validator->errors()->first()], 422);
         }
-
+    
         $volunteer = auth()->user();
 
         $diffTime = time() - $volunteer->updated_at->timestamp;
